@@ -6,27 +6,27 @@ import {
   StyledLabel,
 } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { setContacts } from 'redux/phoneBook/slice';
-import { selectContacts } from 'redux/phoneBook/selectors';
+import { selectItems } from 'redux/phoneBook/selectors';
+import { addContactThunk } from 'redux/phoneBook/operations';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts);
+  const contacts = useSelector(selectItems);
 
   const handleSubmit = e => {
     e.preventDefault();
-    const { name, number } = e.target.elements;
+    const { name, phone } = e.target.elements;
     if (contacts.find(user => user.name === name.value)) {
       alert(`${name.value} is already in contacts`);
       return;
     }
-    dispatch(
-      setContacts({
-        name: name.value,
-        number: number.value,
-        id: crypto.randomUUID(),
-      })
-    );
+    const contact = {
+      name: name.value,
+      phone: phone.value,
+      id: crypto.randomUUID(),
+    };
+
+    dispatch(addContactThunk(contact));
     e.target.reset();
   };
 
@@ -47,7 +47,7 @@ const ContactForm = () => {
         Number
         <StyledInput
           type="tel"
-          name="number"
+          name="phone"
           pattern="[0-9]{3}-[0-9]{2}-[0-9]{2}"
           title="123-45-67"
           required

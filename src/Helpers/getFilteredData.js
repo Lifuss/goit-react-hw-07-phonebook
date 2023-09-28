@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 const getFilteredData = (data, filter) => {
   return data.filter(
     item =>
@@ -9,14 +7,3 @@ const getFilteredData = (data, filter) => {
 };
 
 export default getFilteredData;
-
-getFilteredData.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      name: PropTypes.string,
-      number: PropTypes.string,
-    })
-  ),
-  filter: PropTypes.string,
-};

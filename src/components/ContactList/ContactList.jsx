@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { StyledItem, StyledItemBtn, StyledList } from './ContactList.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFilter, selectItems } from 'redux/phoneBook/selectors';
@@ -35,17 +34,6 @@ const ContactList = () => {
       ))}
     </StyledList>
   );
-};
-
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string,
-      id: PropTypes.string,
-      number: PropTypes.string,
-    })
-  ),
-  filter: PropTypes.string,
 };
 
 export default ContactList;
